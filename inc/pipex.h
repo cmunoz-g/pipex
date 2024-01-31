@@ -16,6 +16,7 @@ void	child_two(t_pipex stc, int *fd);
 void	ft_parse_envp(char **envp, t_pipex stc);
 void	ft_parse_cmds(char **argv, t_pipex stc);
 void	ft_path(t_pipex stc);
+void	ft_error(char *str);
 
 typedef struct	s_pipex
 {

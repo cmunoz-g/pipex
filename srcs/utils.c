@@ -1,5 +1,16 @@
 #include "pipex.h"
 
+void	ft_error(char *str)
+{
+	size_t	len;
+
+	len = ft_strlen(str);
+	write(2, "Error: ", 7);
+	write(2, str, len);
+	write(2, "\n", 1);
+	exit(EXIT_FAILURE);
+}
+
 void	ft_parse_envp(char **envp, t_pipex stc)
 {
 	size_t	i;

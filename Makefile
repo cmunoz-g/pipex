@@ -4,32 +4,23 @@ CFLAGS = -Wall -Werror -Wextra
 INCLUDE = inc/
 FOLDER = srcs/
 OBJFOLDER = obj/
-LIBFT = libft/
-LIBFT_LIB = $(LIBFT)libft.a
-SRCS = ft_error.c ft_split.c ft_strdup.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c \
-       ft_strlen.c ft_strnstr.c main.c pipex.c
-OBJS = $(addprefix $(OBJFOLDER), $(SRCS:.c=.o))
+SRCS = main.c pipex.c utils.c
+OBJS = $(SRCS:.c=.o)
+
+$(NAME): $(OBJS)
+	$(CC) -o $(NAME) $(OBJS)
 
 $(OBJFOLDER)%.o: $(FOLDER)%.c
-	@mkdir -p $(OBJFOLDER)
-	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(LIBFT) -c $< -o $@
-
-$(NAME): $(LIBFT_LIB) $(OBJS)
-	$(CC) -o $(NAME) $(OBJS) -L$(LIBFT) -lft
-
-$(LIBFT_LIB):
-	$(MAKE) -C $(LIBFT)
+	$(CC) $(CFLAGS) -I$(INCLUDE) -c $< -o $@
 
 all: $(NAME)
 
 clean:
-	rm -rf $(OBJFOLDER)
-	$(MAKE) -C $(LIBFT) clean
+	rm -rf $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) -C $(LIBFT) fclean
 
-re: fclean all
+re: fclean all 
+.PHONY: all clean fclean re./ 
 
-.PHONY: all clean fclean re
