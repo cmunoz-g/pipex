@@ -3,19 +3,33 @@
 char	**ft_awk(char *cmd)
 {
 	char	**res;
+	char	*cpy;
 	size_t	len;
+	size_t	start;
 
+	len = 0;
+	start = 0;
+	cpy = cmd + 4;
+	while (*cpy && (*cpy == 34 || *cpy == 39 || *cpy == 92))
+	{
+		start++;
+		cpy++;
+	}
+	while (*cpy && (*cpy != 34 || *cpy != 39 || *cpy != 92))
+	{
+		cpy++;
+		len++;
+	}
 	res = (char **)malloc(sizeof(char *) * 3);
 	if (!res)
 		return (NULL);
 	res[0] = ft_strdup("awk");
 	if (!res[0])
 		return (NULL);
-	len = ft_strlen(cmd + 4);
-	res[1] = (char *)malloc(len - 1);
+	res[1] = (char *)malloc(len + 1);
 	if (!res[1])
 		return (NULL); 
-	ft_strlcpy(res[1], cmd + 5, len);
+	ft_strlcpy(res[1], cmd + start + 4, len);
 	res[2] = NULL;
 	return (res);
 }
