@@ -11,7 +11,7 @@ void	ft_error(char *str)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_parse_envp(char **envp, t_pipex stc)
+void	ft_parse_envp(char **envp, t_pipex *stc)
 {
 	size_t	i;
 
@@ -20,12 +20,12 @@ void	ft_parse_envp(char **envp, t_pipex stc)
 		i++;
 	if (!envp[i])
 		ft_error("No PATH found in envp");
-	stc->parsed_path = ft_split(envp[i] + 5, ':');
-	if (!stc->parsed_path)
+	stc->path = ft_split(envp[i] + 5, ':');
+	if (!stc->path)
 		ft_error("Memory problems when splitting PATH");
 }
 
-void	ft_parse_cmds(char **argv, t_pipex stc)
+void	ft_parse_cmds(char **argv, t_pipex *stc)
 {
 	stc->parsed_cmd_one = ft_split(argv[2], ' ');
 	if (!stc->parsed_cmd_one)
@@ -35,7 +35,7 @@ void	ft_parse_cmds(char **argv, t_pipex stc)
 		ft_error("Memory problems when parsing second cmd");
 }
 
-void	ft_path(t_pipex stc)
+void	ft_path(t_pipex *stc)
 {
 	size_t	i;
 	char	*temp;
@@ -43,7 +43,7 @@ void	ft_path(t_pipex stc)
 	i = 0;
 	while (stc->path[i])
 	{
-		temp = ft_strjoin(stc->path[i], stc->parsed_cmd_one[0])
+		temp = ft_strjoin(stc->path[i], stc->parsed_cmd_one[0]);
 		if (access(temp, X_OK) == 0)
 			stc->path_cmd_one = temp;
 		else
@@ -55,7 +55,7 @@ void	ft_path(t_pipex stc)
 	i = 0;
 	while (stc->path[i])
 	{
-		temp = ft_strjoin(stc->path[i], stc->parsed_cmd_two[0])
+		temp = ft_strjoin(stc->path[i], stc->parsed_cmd_two[0]);
 		if (access(temp, X_OK) == 0)
 			stc->path_cmd_two = temp;
 		else

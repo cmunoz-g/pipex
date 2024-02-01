@@ -4,23 +4,30 @@ CFLAGS = -Wall -Werror -Wextra
 INCLUDE = inc/
 FOLDER = srcs/
 OBJFOLDER = obj/
+
+# Source files
 SRCS = main.c pipex.c utils.c
-OBJS = $(SRCS:.c=.o)
+
+# Correctly transforming source file names into object file names
+OBJS = $(SRCS:%.c=$(OBJFOLDER)%.o)
+
+# Ensure the obj/ directory exists before compiling any object files
+$(OBJFOLDER)%.o: $(FOLDER)%.c 
+	@mkdir -p $(OBJFOLDER)
+	$(CC) $(CFLAGS) -I$(INCLUDE) -c $< -o $@
 
 $(NAME): $(OBJS)
 	$(CC) -o $(NAME) $(OBJS)
 
-$(OBJFOLDER)%.o: $(FOLDER)%.c
-	$(CC) $(CFLAGS) -I$(INCLUDE) -c $< -o $@
-
 all: $(NAME)
 
 clean:
-	rm -rf $(OBJS)
+	@rm -rf $(OBJFOLDER)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
-re: fclean all 
-.PHONY: all clean fclean re./ 
+re: fclean all
+
+.PHONY: all clean fclean re
 

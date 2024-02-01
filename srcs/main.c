@@ -2,7 +2,7 @@
 
 int	main(int argc, char *argv[], char **envp)
 {
-	t_pipex stc;
+	t_pipex *stc;
 
 	if (!envp || !*envp)
 		ft_error("No environment variables");
@@ -15,8 +15,8 @@ int	main(int argc, char *argv[], char **envp)
 		ft_error("Could not open one of the files");
 	ft_parse_envp(envp, stc);
 	ft_parse_cmds(argv, stc);
-	ft_path(envp, stc);
-	pipex(stc, envp, argv);
+	ft_path(stc);
+	pipex(stc, envp);
 	//hay que liberar memoria?
 	return (0);
 }
