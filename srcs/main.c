@@ -20,6 +20,9 @@ int	main(int argc, char *argv[], char **envp)
 	return (0);
 }
 
+// gestionar awk diferente, si tiene '' quitarselas
+
+
 // declare struct
 	// init struct, open files
 	// parse envp (locate PATH, generate a char** with all directories)
