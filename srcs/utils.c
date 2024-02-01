@@ -33,7 +33,7 @@ char	**ft_awk(char *cmd)
 		return (NULL); 
 	ft_strlcpy(res[1], cmd, len + 1);
 	res[2] = NULL;
-	printf("%s\n",res[1]);
+	//printf("%s\n",res[1]);
 	exit(0);
 	return (res);
 }
