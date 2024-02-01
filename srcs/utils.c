@@ -4,23 +4,20 @@
 // eficiente y con pocas lineas
 //  ./pipex infile.txt "grep hello" "awk '\"{count++} END {print count}\"'" outfile.txt
 // {count++} END {print count}"
+// 34, 39, 92
 
 char	**ft_awk(char *cmd)
 {
 	char	**res;
 	char	*cpy;
 	size_t	len;
-	size_t	start;
 
 	len = 0;
-	start = 0;
-	cpy = cmd + 4;
-	while (*cpy && (*cpy == 34 || *cpy == 39 || *cpy == 92))
-	{
-		start++;
-		cpy++;
-	}
-	while (*cpy && (*cpy != 34 || *cpy != 39 || *cpy != 92))
+	cmd += 4;
+	while (*cmd == 34 || *cmd == 39 || *cmd == 92)
+		cmd++;
+	cpy = cmd;
+	while (*cpy != 34 && *cpy != 39 && *cpy != 92)
 	{
 		cpy++;
 		len++;
@@ -34,7 +31,7 @@ char	**ft_awk(char *cmd)
 	res[1] = (char *)malloc(len + 1);
 	if (!res[1])
 		return (NULL); 
-	ft_strlcpy(res[1], cmd + start + 4, len);
+	ft_strlcpy(res[1], cmd, len + 1);
 	res[2] = NULL;
 	printf("%s\n",res[1]);
 	exit(0);
