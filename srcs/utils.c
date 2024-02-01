@@ -51,8 +51,6 @@ void	ft_path(t_pipex *stc)
 			free(temp);
 		i++;
 	}
-	if (!stc->path_cmd_one)
-		ft_error("Could not find the first cmd");
 	i = 0;
 	while (stc->path[i])
 	{
@@ -64,6 +62,4 @@ void	ft_path(t_pipex *stc)
 			free(temp);
 		i++;
 	}
-	if (!stc->path_cmd_two)
-		ft_error("Could not find the second cmd");
 }
