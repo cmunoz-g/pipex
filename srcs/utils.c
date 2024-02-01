@@ -1,5 +1,10 @@
 #include "pipex.h"
 
+// con este comando no funciona, revisar ft_awk para que se comporte correctamente en todas circunstancias y que sea 
+// eficiente y con pocas lineas
+//  ./pipex infile.txt "grep hello" "awk '\"{count++} END {print count}\"'" outfile.txt
+// {count++} END {print count}"
+
 char	**ft_awk(char *cmd)
 {
 	char	**res;
@@ -31,6 +36,8 @@ char	**ft_awk(char *cmd)
 		return (NULL); 
 	ft_strlcpy(res[1], cmd + start + 4, len);
 	res[2] = NULL;
+	printf("%s\n",res[1]);
+	exit(0);
 	return (res);
 }
 
