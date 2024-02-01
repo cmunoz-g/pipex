@@ -4,20 +4,17 @@ CFLAGS = -Wall -Werror -Wextra
 INCLUDE = inc/
 FOLDER = srcs/
 OBJFOLDER = obj/
-
-# Source files
 SRCS = main.c pipex.c utils.c
-
-# Correctly transforming source file names into object file names
 OBJS = $(SRCS:%.c=$(OBJFOLDER)%.o)
+LIBFT = libft
 
-# Ensure the obj/ directory exists before compiling any object files
 $(OBJFOLDER)%.o: $(FOLDER)%.c 
 	@mkdir -p $(OBJFOLDER)
-	$(CC) $(CFLAGS) -I$(INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(INCLUDE)  -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) -o $(NAME) $(OBJS)
+	@make -C $(LIBFT)
+	$(CC) -o $(NAME) $(OBJS) $(LIBFT)/libft.a
 
 all: $(NAME)
 
