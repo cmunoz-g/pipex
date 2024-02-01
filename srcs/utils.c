@@ -43,7 +43,8 @@ void	ft_path(t_pipex *stc)
 	i = 0;
 	while (stc->path[i])
 	{
-		temp = ft_strjoin(stc->path[i], stc->parsed_cmd_one[0]);
+		temp = ft_strjoin(stc->path[i], "/");
+		temp = ft_strjoin(temp, stc->parsed_cmd_one[0]);
 		if (access(temp, X_OK) == 0)
 			stc->path_cmd_one = temp;
 		else
@@ -55,7 +56,8 @@ void	ft_path(t_pipex *stc)
 	i = 0;
 	while (stc->path[i])
 	{
-		temp = ft_strjoin(stc->path[i], stc->parsed_cmd_two[0]);
+		temp = ft_strjoin(stc->path[i], "/");
+		temp = ft_strjoin(temp, stc->parsed_cmd_two[0]);
 		if (access(temp, X_OK) == 0)
 			stc->path_cmd_two = temp;
 		else
