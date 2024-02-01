@@ -6,8 +6,11 @@ void	child_one(t_pipex *stc, int *fd, char **envp)
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[0]);
 	close(stc->fd_outfile);
-	if (execve(stc->path_cmd_one, stc->parsed_cmd_one, envp) == -1)
-		ft_error("Could not execute the first cmd");
+	if (stc->path_cmd_one && stc->parsed_cmd_one)
+	{
+		if (execve(stc->path_cmd_one, stc->parsed_cmd_one, envp) == -1)
+			ft_error("Could not execute the first cmd");
+	}
 }
 
 void	child_two(t_pipex *stc, int *fd, char **envp)
@@ -16,8 +19,11 @@ void	child_two(t_pipex *stc, int *fd, char **envp)
 	dup2(stc->fd_outfile, STDOUT_FILENO);
 	close(fd[1]);
 	close(stc->fd_infile);
-	if (execve(stc->path_cmd_two, stc->parsed_cmd_two, envp) == -1)
-		ft_error("Could not execute the second cmd");
+	if (stc->path_cmd_two && stc->parsed_cmd_two)
+	{
+		if (execve(stc->path_cmd_two, stc->parsed_cmd_two, envp) == -1)
+			ft_error("Could not execute the second cmd");
+	}
 }
 
 void	pipex(t_pipex *stc, char **envp)
