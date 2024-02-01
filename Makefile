@@ -20,9 +20,11 @@ all: $(NAME)
 
 clean:
 	@rm -rf $(OBJFOLDER)
+	@make clean -C $(LIBFT)
 
 fclean: clean
 	@rm -f $(NAME)
+	@make fclean -C $(LIBFT)
 
 re: fclean all
 
