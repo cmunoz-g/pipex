@@ -40,11 +40,9 @@ void	pipex(t_pipex *stc, char **envp)
 	if (pid_two < 0)
 		ft_error("Could not fork the second process");
 	if (pid_two == 0)
-	{
-		waitpid(pid_one, &status, 0);
 		child_two(stc, fd, envp);
-	}
 	else
 		close(fd[0]);
+	waitpid(pid_one, &status, 0);
 	waitpid(pid_two, &status, 0);
 }
