@@ -24,7 +24,7 @@ void	child_two(t_pipex *stc, int *fd, char **envp, char **argv, int *status_two)
 	close(stc->fd_infile);
 	if (!stc->path_cmd_two)
 	{
-		status_two = 127;
+		*status_two = 127;
 		ft_error(stc->parsed_cmd_two[0],"command not found", 127);
 	}
 	if (execve(stc->path_cmd_two, stc->parsed_cmd_two, envp) == -1)
