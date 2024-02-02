@@ -1,6 +1,6 @@
 #include "pipex.h"
 
-void	child_one(t_pipex *stc, int *fd, char **envp, char **argv, int status_one)
+void	child_one(t_pipex *stc, int *fd, char **envp, char **argv)
 {
 	if (stc->fd_infile < 0)
 		ft_error(argv[1],"No such file or directory", EXIT_FAILURE);
@@ -14,7 +14,7 @@ void	child_one(t_pipex *stc, int *fd, char **envp, char **argv, int status_one)
 		ft_error("","Could not execute the first cmd", EXIT_FAILURE);
 }
 
-void	child_two(t_pipex *stc, int *fd, char **envp, char **argv, int status_two)
+void	child_two(t_pipex *stc, int *fd, char **envp, char **argv, int *status_two)
 {
 	if (stc->fd_outfile < 0)
 		ft_error(argv[4],"No such file or directory", EXIT_FAILURE);
@@ -68,7 +68,7 @@ void	pipex(t_pipex *stc, char **envp, char**argv)
 	if (pid_two < 0)
 		ft_error("","Could not fork the second process", EXIT_FAILURE);
 	if (pid_two == 0)
-		child_two(stc, fd, envp, argv);
+		child_two(stc, fd, envp, argv, &status_two);
 	else
 		close(fd[0]);
 	waitpid(pid_one, &status_one, 0);
