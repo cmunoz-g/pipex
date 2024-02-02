@@ -56,8 +56,9 @@ void	ft_parse_envp(char **envp, t_pipex *stc)
 	while (envp[i] && ft_strncmp("PATH=", envp[i], 5) != 0)
 		i++;
 	if (!envp[i])
-		ft_error("","No PATH found in envp", EXIT_FAILURE);
-	stc->path = ft_split(envp[i] + 5, ':');
+		stc->path = ft_split("/bin:/sbin:/usr/bin:/usr/sbin:/usr/sbin:/usr/local/bin:/opt/bin:/usr/local/sbin", ':');
+	else
+		stc->path = ft_split(envp[i] + 5, ':');
 	if (!stc->path)
 		ft_error("","Memory problems when splitting PATH", EXIT_FAILURE);
 }
