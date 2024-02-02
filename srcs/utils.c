@@ -6,7 +6,7 @@ char **ft_awk(char *cmd)
 	char	*cpy;
 	size_t	len;
 
-	if (ft_strnstr(cmd, "'{", 10) || ft_strnstr(cmd, "\\\"{", 10))
+	if (ft_strnstr(cmd, "'{", 15) || ft_strnstr(cmd, "\\\"{", 15))
 	{	
 		len = 0;
 		cmd += 4;
@@ -22,24 +22,22 @@ char **ft_awk(char *cmd)
 		if (!res)
 			return (NULL);
 		res[0] = ft_strdup("awk");
-		if (!res[0])
-			return (NULL);
 		res[1] = (char *)malloc(len + 1);
 		if (!res[1])
 			return (NULL); 
 		ft_strlcpy(res[1], cmd, len + 1); 
 		res[2] = NULL;
 	}
-	else
+	else if (ft_strnstr(cmd, "'\\\"", 15))
 	{
 		res = (char **)malloc(sizeof(char *) * 2);
 		if (!res)
 			return (NULL);
-		res[0] = ft_strdup("awk");
-		if (!res[0])
-			return (NULL);
+		res[0] = ft_strdup("cat");
 		res[1] = NULL;
 	}
+	else
+		res = ft_split(cmd, ' ');
 	return (res);
 }
 
