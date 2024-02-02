@@ -14,7 +14,7 @@ void	child_one(t_pipex *stc, int *fd, char **envp, char **argv)
 		ft_error("","Could not execute the first cmd", EXIT_FAILURE);
 }
 
-void	child_two(t_pipex *stc, int *fd, char **envp, char **argv, int *status_two)
+void	child_two(t_pipex *stc, int *fd, char **envp, char **argv)
 {
 	if (stc->fd_outfile < 0)
 		ft_error(argv[4],"No such file or directory", EXIT_FAILURE);
@@ -23,10 +23,7 @@ void	child_two(t_pipex *stc, int *fd, char **envp, char **argv, int *status_two)
 	close(fd[1]);
 	close(stc->fd_infile);
 	if (!stc->path_cmd_two)
-	{
-		*status_two = 127;
 		ft_error(stc->parsed_cmd_two[0],"command not found", 127);
-	}
 	if (execve(stc->path_cmd_two, stc->parsed_cmd_two, envp) == -1)
 		ft_error("","Could not execute the second cmd", EXIT_FAILURE);
 }
@@ -36,10 +33,6 @@ void	status(int status_one, int status_two)
 	int	exit_status;
 
 	exit_status = 0;
-	if (status_one != 0)
-		exit(status_one);
-	else if (status_two != 0)
-		exit(status_two);
 	if (WIFEXITED(status_one) && WEXITSTATUS(status_one) != 0)
 		exit_status = WEXITSTATUS(status_one);
     if (WIFEXITED(status_two) && WEXITSTATUS(status_two) != 0)
@@ -68,7 +61,7 @@ void	pipex(t_pipex *stc, char **envp, char**argv)
 	if (pid_two < 0)
 		ft_error("","Could not fork the second process", EXIT_FAILURE);
 	if (pid_two == 0)
-		child_two(stc, fd, envp, argv, &status_two);
+		child_two(stc, fd, envp, argv);
 	else
 		close(fd[0]);
 	waitpid(pid_one, &status_one, 0);
