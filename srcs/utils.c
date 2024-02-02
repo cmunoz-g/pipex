@@ -1,32 +1,45 @@
 #include "pipex.h"
 
-char	**ft_awk(char *cmd)
+char **ft_awk(char *cmd)
 {
 	char	**res;
 	char	*cpy;
 	size_t	len;
 
-	len = 0;
-	cmd += 4;
-	while (*cmd == 34 || *cmd == 39 || *cmd == 92)
-		cmd++;
-	cpy = cmd;
-	while (*cpy != 34 && *cpy != 39 && *cpy != 92)
-	{
-		cpy++;
-		len++;
+	if (ft_strnstr(cmd, "'{", 10) || ft_strnstr(cmd, "\\\"{", 10))
+	{	
+		len = 0;
+		cmd += 4;
+		while (*cmd == 34 || *cmd == 39 || *cmd == 92)
+			cmd++;
+		cpy = cmd;
+		while (*cpy != 34 && *cpy != 39 && *cpy != 92)
+		{
+			cpy++;
+			len++;
+		}
+		res = (char **)malloc(sizeof(char *) * 3);
+		if (!res)
+			return (NULL);
+		res[0] = ft_strdup("awk");
+		if (!res[0])
+			return (NULL);
+		res[1] = (char *)malloc(len + 1);
+		if (!res[1])
+			return (NULL); 
+		ft_strlcpy(res[1], cmd, len + 1); 
+		res[2] = NULL;
 	}
-	res = (char **)malloc(sizeof(char *) * 3);
-	if (!res)
-		return (NULL);
-	res[0] = ft_strdup("awk");
-	if (!res[0])
-		return (NULL);
-	res[1] = (char *)malloc(len + 1);
-	if (!res[1])
-		return (NULL); 
-	ft_strlcpy(res[1], cmd, len + 1); //revisar si se esta copiando bien aqui, si me rallo rehacer la ft strlcpy especifica para este caso y punto
-	res[2] = NULL;
+	else
+	{
+		res = (char **)malloc(sizeof(char *) * 2);
+		if (!res)
+			return (NULL);
+		res[0] = ft_strdup("awk");
+		if (!res[0])
+			return (NULL);
+		res[1] = NULL;
+	}
 	return (res);
 }
 
