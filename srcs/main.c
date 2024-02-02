@@ -4,16 +4,8 @@ int	main(int argc, char *argv[], char **envp)
 {
 	t_pipex *stc;
 
-	if (!envp)
-	{
-		printf("esto sin asterisco!\n");
+	if (!envp || !*envp)
 		ft_error("","No environment variables", EXIT_FAILURE);
-	}
-	if (!*envp)
-	{
-		printf("esto!\n");
-		ft_error("","No environment variables", EXIT_FAILURE);
-	}
 	if (argc != 5)
 		ft_error("","Wrong number of arguments", EXIT_FAILURE);	
 	stc = ft_calloc(1, sizeof(t_pipex));

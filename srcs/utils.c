@@ -53,7 +53,7 @@ void	ft_parse_envp(char **envp, t_pipex *stc)
 	size_t	i;
 
 	i = 0;
-	while (ft_strncmp("PATH=", envp[i], 5) != 0)
+	while (envp[i] && ft_strncmp("PATH=", envp[i], 5) != 0)
 		i++;
 	if (!envp[i])
 		ft_error("","No PATH found in envp", EXIT_FAILURE);
