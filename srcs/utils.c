@@ -30,13 +30,20 @@ char	**ft_awk(char *cmd)
 	return (res);
 }
 
-void	ft_error(char *str, int error_code)
+void	ft_error(char *str, char *message, int error_code)
 {
-	size_t	len;
+	size_t	len_str;
+	size_t	len_message;
 
-	len = ft_strlen(str);
-	write(2, "Error: ", 7);
-	write(2, str, len);
+	len_str = ft_strlen(str);
+	len_message = ft_strlen(message);
+	write(2, "pipex: ", 7);
+	if (len_str > 0)
+	{
+		write(2, str, len_str);
+		write(2, ": ", 2);
+	}
+	write(2, message, len_message);
 	write(2, "\n", 1);
 	exit(error_code);
 }
@@ -49,10 +56,10 @@ void	ft_parse_envp(char **envp, t_pipex *stc)
 	while (ft_strncmp("PATH=", envp[i], 5) != 0)
 		i++;
 	if (!envp[i])
-		ft_error("No PATH found in envp", EXIT_FAILURE);
+		ft_error("","No PATH found in envp", EXIT_FAILURE);
 	stc->path = ft_split(envp[i] + 5, ':');
 	if (!stc->path)
-		ft_error("Memory problems when splitting PATH", EXIT_FAILURE);
+		ft_error("","Memory problems when splitting PATH", EXIT_FAILURE);
 }
 
 void	ft_parse_cmds(char **argv, t_pipex *stc)
@@ -62,13 +69,13 @@ void	ft_parse_cmds(char **argv, t_pipex *stc)
 	else
 		stc->parsed_cmd_one = ft_split(argv[2], ' ');
 	if (!stc->parsed_cmd_one)
-		ft_error("Memory problems when parsing first cmd", EXIT_FAILURE);
+		ft_error("","Memory problems when parsing first cmd", EXIT_FAILURE);
 	if (ft_strncmp(argv[3], "awk ", 4) == 0)
 		stc->parsed_cmd_two = ft_awk(argv[3]);
 	else
 		stc->parsed_cmd_two = ft_split(argv[3], ' ');
 	if (!stc->parsed_cmd_two)
-		ft_error("Memory problems when parsing second cmd", EXIT_FAILURE);
+		ft_error("","Memory problems when parsing second cmd", EXIT_FAILURE);
 }
 
 void	ft_path(t_pipex *stc)
