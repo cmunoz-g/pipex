@@ -37,6 +37,7 @@ void	status(int status_one, int status_two)
 		exit_status = WEXITSTATUS(status_one);
     if (WIFEXITED(status_two) && WEXITSTATUS(status_two) != 0)
 		exit_status = WEXITSTATUS(status_two);
+	printf("%d\n",exit_status);
 	exit(exit_status);
 }
 
