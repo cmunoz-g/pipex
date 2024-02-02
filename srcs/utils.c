@@ -1,6 +1,6 @@
 #include "pipex.h"
 
-char **ft_awk(char *cmd)
+char **ft_awk(char *cmd) // hay que arreglar esto
 {
 	char	**res;
 	char	*cpy;
