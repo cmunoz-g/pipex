@@ -38,7 +38,7 @@ void	status(int status_one, int status_two)
     if (WIFEXITED(status_two) && WEXITSTATUS(status_two) != 0)
 		exit_status = WEXITSTATUS(status_two);
 	if (exit_status != 0)
-		exit(exit_status);
+		exit(0);
 }
 
 void	pipex(t_pipex *stc, char **envp, char**argv)
