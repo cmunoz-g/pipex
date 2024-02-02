@@ -5,14 +5,12 @@ int	main(int argc, char *argv[], char **envp)
 	t_pipex *stc;
 
 	if (!envp || !*envp)
-		ft_error("No environment variables");
+		ft_error("No environment variables", EXIT_FAILURE);
 	if (argc != 5)
-		ft_error("Wrong number of arguments");	
+		ft_error("Wrong number of arguments", EXIT_FAILURE);	
 	stc = ft_calloc(1, sizeof(t_pipex));
 	stc->fd_infile = open(argv[1], O_RDONLY);
 	stc->fd_outfile = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (stc->fd_infile < 0 || stc->fd_outfile < 0)
-		ft_error("Could not open one of the files");
 	ft_parse_envp(envp, stc);
 	ft_parse_cmds(argv, stc);
 	ft_path(stc);
