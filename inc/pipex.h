@@ -22,7 +22,8 @@ typedef struct	s_pipex
 }				t_pipex;
 
 int	main(int argc, char *argv[], char **envp);
-void	pipex(t_pipex *stc, char **envp, char **argv);
+int	pipex(t_pipex *stc, char **envp, char **argv);
+int	status(int status_one, int status_two);
 void	child_one(t_pipex *stc, int *fd, char **envp, char **argv);
 void	child_two(t_pipex *stc, int *fd, char **envp, char **argv);
 void	ft_parse_envp(char **envp, t_pipex *stc);

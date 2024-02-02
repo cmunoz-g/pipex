@@ -14,8 +14,7 @@ int	main(int argc, char *argv[], char **envp)
 	ft_parse_envp(envp, stc);
 	ft_parse_cmds(argv, stc);
 	ft_path(stc);
-	pipex(stc, envp, argv);
-	return (0);
+	return (pipex(stc, envp, argv));
 }
 
 // gestionar awk diferente, si tiene '' quitarselas
