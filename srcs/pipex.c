@@ -28,18 +28,20 @@ void	child_two(t_pipex *stc, int *fd, char **envp, char **argv)
 		ft_error("","Could not execute the second cmd", EXIT_FAILURE);
 }
 
-// void	status(int status_one, int status_two)
-// {
-// 	int	exit_status;
+void	status(int status_one, int status_two)
+{
+	int	exit_status;
 
-// 	exit_status = 0;
-// 	if (WIFEXITED(status_one) && WEXITSTATUS(status_one) != 0)
-// 		exit_status = WEXITSTATUS(status_one);
-//     if (WIFEXITED(status_two) && WEXITSTATUS(status_two) != 0)
-// 		exit_status = WEXITSTATUS(status_two);
-// 	if ()
-// 	exit(exit_status);
-// }
+	exit_status = 0;
+	if (WIFEXITED(status_one) && WEXITSTATUS(status_one) != 0)
+		exit_status = WEXITSTATUS(status_one);
+    if (WIFEXITED(status_two) && WEXITSTATUS(status_two) != 0)
+		exit_status = WEXITSTATUS(status_two);
+	if (exit_status == 127)
+		exit(exit_status);
+	else
+		exit(0);
+}
 
 void	pipex(t_pipex *stc, char **envp, char**argv)
 {
@@ -67,5 +69,5 @@ void	pipex(t_pipex *stc, char **envp, char**argv)
 		close(fd[0]);
 	waitpid(pid_one, &status_one, 0);
     waitpid(pid_two, &status_two, 0);
-	//status(status_one, status_two);
+	status(status_one, status_two);
 }
