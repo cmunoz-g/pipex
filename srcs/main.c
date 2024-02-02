@@ -4,8 +4,8 @@ int	main(int argc, char *argv[], char **envp)
 {
 	t_pipex *stc;
 
-	if (!envp || !*envp)
-		ft_error("","No environment variables", EXIT_FAILURE);
+	//if (!envp || !*envp)
+		//ft_error("","No environment variables", EXIT_FAILURE);
 	if (argc != 5)
 		ft_error("","Wrong number of arguments", EXIT_FAILURE);	
 	stc = ft_calloc(1, sizeof(t_pipex));
@@ -38,3 +38,8 @@ int	main(int argc, char *argv[], char **envp)
 			// if parent
 				//waitpid(child one)
 				//waitpid (child two)
+
+
+
+// si por algun casual tengo que comprobar el open en el main, puedo hacer dos funciones error, una que printee el error y ya y otra
+// como la que ya tengo que exitee el programa.
