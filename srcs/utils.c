@@ -1,12 +1,12 @@
 #include "pipex.h"
 
-char **ft_awk(char *cmd) // hay que arreglar esto
+char **ft_awk(char *cmd) 
 {
 	char	**res;
 	char	*cpy;
 	size_t	len;
 
-	if (ft_strnstr(cmd, "'{", 15) || ft_strnstr(cmd, "\\\"{", 15))
+	if (ft_strnstr(cmd, "'{", 15) || ft_strnstr(cmd, " \"{", 15))
 	{	
 		len = 0;
 		cmd += 4;
@@ -27,8 +27,9 @@ char **ft_awk(char *cmd) // hay que arreglar esto
 			return (NULL); 
 		ft_strlcpy(res[1], cmd, len + 1); 
 		res[2] = NULL;
+	
 	}
-	else if (ft_strnstr(cmd, "'\\\"", 15))
+	else if (ft_strnstr(cmd, " '\"{", 15))
 	{
 		res = (char **)malloc(sizeof(char *) * 2);
 		if (!res)
