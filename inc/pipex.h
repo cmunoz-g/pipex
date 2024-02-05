@@ -7,6 +7,7 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <limits.h>
 # include <stdlib.h>
 # include "../libft/libft.h"
 
