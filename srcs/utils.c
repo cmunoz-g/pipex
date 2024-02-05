@@ -6,7 +6,7 @@ char **ft_awk(char *cmd)
 	char	*cpy;
 	size_t	len;
 
-	if (ft_strnstr(cmd, " '{", 15) || ft_strnstr(cmd, " \"{", 15) || ft_strnstr(cmd, " \"'{"))
+	if (ft_strnstr(cmd, " '{", 15) || ft_strnstr(cmd, " \"{", 15) || ft_strnstr(cmd, " \"'{", 15))
 	{	
 		len = 0;
 		cmd += 4;
