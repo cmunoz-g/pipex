@@ -37,7 +37,7 @@ void	status(int status_one, int status_two)
 		exit_status = WEXITSTATUS(status_one);
     if (WIFEXITED(status_two) && WEXITSTATUS(status_two) != 0)
 		exit_status = WEXITSTATUS(status_two);
-	if (exit_status == 127)
+	if (exit_status == 127 || exit_status == 2)
 		exit(exit_status);
 	else
 		exit(0);
