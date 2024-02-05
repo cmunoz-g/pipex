@@ -43,7 +43,11 @@ char **ft_awk(char *cmd)
 			return (NULL);
 		res[0] = ft_strdup("awk");
 		cmd += 4;
-		ft_strlcpy(res[1], cmd, INT_MAX);
+		len = ft_strlen(cmd);
+		res[1] = (char *)malloc(len + 1);
+		if (!res[1])
+			return (NULL); 
+		ft_strlcpy(res[1], cmd, len + 1);
 		res[2] = NULL;
 	}
 	return (res);
