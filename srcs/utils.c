@@ -6,7 +6,7 @@ char **ft_awk(char *cmd)
 	char	*cpy;
 	size_t	len;
 
-	if (ft_strnstr(cmd, " '{", 15) || ft_strnstr(cmd, " \"{", 15))
+	if (ft_strnstr(cmd, " '{", 15) || ft_strnstr(cmd, " \"{", 15) || ft_strnstr(cmd, " \"'{"))
 	{	
 		len = 0;
 		cmd += 4;
@@ -27,7 +27,6 @@ char **ft_awk(char *cmd)
 			return (NULL); 
 		ft_strlcpy(res[1], cmd, len + 1); 
 		res[2] = NULL;
-		printf("aqui!\n");
 	}
 	else if (ft_strnstr(cmd, " '\"{", 15))
 	{
