@@ -36,7 +36,7 @@ char **ft_awk(char *cmd)
 		res[0] = ft_strdup("cat");
 		res[1] = NULL;
 	}
-	else if (ft_strnstr(cmd, " \"'{", 15))
+	else
 	{
 		res = (char **)malloc(sizeof(char *) * 3);
 		if (!res)
