@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmunoz-g <cmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/21 11:08:03 by cmunoz-g          #+#    #+#             */
+/*   Updated: 2024/02/21 12:32:27 by cmunoz-g         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 int	main(int argc, char *argv[], char **envp)
 {
-	t_pipex *stc;
+	t_pipex	*stc;
 
 	//if (!envp || !*envp)
-		//ft_error("","No environment variables", EXIT_FAILURE);
+		//ft_error("", "No environment variables", EXIT_FAILURE); preguntar a mario tmb sobre esto, sin ponerlo me pasa el pipex medic poniendolo no.
 	if (argc != 5)
-		ft_error("","Wrong number of arguments", EXIT_FAILURE);	
+		ft_error("", "Wrong number of arguments", EXIT_FAILURE);
 	stc = ft_calloc(1, sizeof(t_pipex));
 	stc->fd_infile = open(argv[1], O_RDONLY);
 	stc->fd_outfile = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
@@ -17,29 +29,3 @@ int	main(int argc, char *argv[], char **envp)
 	pipex(stc, envp, argv);
 	return (0);
 }
-
-// gestionar awk diferente, si tiene '' quitarselas
-
-
-// declare struct
-	// init struct, open files
-	// parse envp (locate PATH, generate a char** with all directories)
-	// parse cmds (divide argv 1 and 4 with split to get a table)
-	// check correct PATH, by adding / and joining path[i] with cmd[0]
-	// ft_exec
-		// declare pid, pid2, status, pipefd
-		// pipe, fork
-		// if child
-			//dup2, execve (con path_cmd_one, parsed_cmd_one, envp)
-		// if parent
-			// fork
-			// if child 2
-				//dup2, execve (two)
-			// if parent
-				//waitpid(child one)
-				//waitpid (child two)
-
-
-
-// si por algun casual tengo que comprobar el open en el main, puedo hacer dos funciones error, una que printee el error y ya y otra
-// como la que ya tengo que exitee el programa.

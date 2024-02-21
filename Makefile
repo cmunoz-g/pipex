@@ -4,7 +4,7 @@ CFLAGS = -Wall -Werror -Wextra
 INCLUDE = inc/
 FOLDER = srcs/
 OBJFOLDER = obj/
-SRCS = main.c pipex.c utils.c
+SRCS = main.c pipex.c utils.c awk.c
 OBJS = $(SRCS:%.c=$(OBJFOLDER)%.o)
 LIBFT = libft
 
