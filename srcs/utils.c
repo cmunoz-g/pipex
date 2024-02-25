@@ -6,7 +6,7 @@
 /*   By: cmunoz-g <cmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:13:53 by cmunoz-g          #+#    #+#             */
-/*   Updated: 2024/02/21 12:27:55 by cmunoz-g         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:49:33 by cmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_parse_envp(char **envp, t_pipex *stc)
 	i = 0;
 	while (envp[i] && ft_strncmp("PATH=", envp[i], 5) != 0)
 		i++;
-	if (!envp[i]) // preguntar a Mario si esto es lo que buscamos :)
+	if (!envp[i])
 		stc->path = ft_split(unset_path, ':');
 	else
 		stc->path = ft_split(envp[i] + 5, ':');

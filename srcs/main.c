@@ -6,7 +6,7 @@
 /*   By: cmunoz-g <cmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:08:03 by cmunoz-g          #+#    #+#             */
-/*   Updated: 2024/02/21 12:32:27 by cmunoz-g         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:49:21 by cmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	main(int argc, char *argv[], char **envp)
 {
 	t_pipex	*stc;
 
-	//if (!envp || !*envp)
-		//ft_error("", "No environment variables", EXIT_FAILURE); preguntar a mario tmb sobre esto, sin ponerlo me pasa el pipex medic poniendolo no.
+	if (!envp || !*envp)
+		ft_error("", "No environment variables", EXIT_FAILURE);
 	if (argc != 5)
 		ft_error("", "Wrong number of arguments", EXIT_FAILURE);
 	stc = ft_calloc(1, sizeof(t_pipex));
