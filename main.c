@@ -13,6 +13,7 @@
 #include "pipex.h"
 
 //PASAR LEAKS!
+// apreder AWK
 
 void	leaks()
 {
