@@ -6,13 +6,13 @@
 /*   By: cmunoz-g <cmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:08:03 by cmunoz-g          #+#    #+#             */
-/*   Updated: 2024/03/07 11:39:04 by cmunoz-g         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:40:07 by cmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-//PASAR LEAKS a mas casos (awk incluido)!
+//PASAR LEAKS a mas casos (awk incluido, y cuando hay errores tmb)!
 // revisar si meterle el ft_free en el ft_error
 // apreder AWK
 
