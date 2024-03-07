@@ -6,17 +6,25 @@
 /*   By: cmunoz-g <cmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:08:03 by cmunoz-g          #+#    #+#             */
-/*   Updated: 2024/02/25 19:49:21 by cmunoz-g         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:32:36 by cmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+//PASAR LEAKS!
+
+void	leaks()
+{
+	system("leaks pipex");
+}
+
 int	main(int argc, char *argv[], char **envp)
 {
 	t_pipex	*stc;
 
-	if (!envp || !*envp)
+	atexit(leaks);
+	if (!envp)
 		ft_error("", "No environment variables", EXIT_FAILURE);
 	if (argc != 5)
 		ft_error("", "Wrong number of arguments", EXIT_FAILURE);
