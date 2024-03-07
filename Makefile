@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 INCLUDE = pipex.h
 OBJFOLDER = obj/
-SRCS = main.c pipex.c utils.c awk.c
+SRCS = main.c pipex.c utils.c awk.c ft_error.c
 OBJS = $(SRCS:%.c=$(OBJFOLDER)%.o)
 LIBFT = libft
 

@@ -6,7 +6,7 @@
 /*   By: cmunoz-g <cmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:13:53 by cmunoz-g          #+#    #+#             */
-/*   Updated: 2024/02/25 19:49:33 by cmunoz-g         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:30:28 by cmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,6 @@ char	**ft_awk(char *cmd)
 	return (res);
 }
 
-void	ft_error(char *str, char *message, int error_code)
-{
-	size_t	len_str;
-	size_t	len_message;
-
-	len_str = ft_strlen(str);
-	len_message = ft_strlen(message);
-	write(2, "pipex: ", 7);
-	if (len_str > 0)
-	{
-		write(2, str, len_str);
-		write(2, ": ", 2);
-	}
-	write(2, message, len_message);
-	write(2, "\n", 1);
-	exit(error_code);
-}
-
 void	ft_parse_envp(char **envp, t_pipex *stc)
 {
 	size_t	i;
@@ -70,6 +52,7 @@ void	ft_parse_envp(char **envp, t_pipex *stc)
 		stc->path = ft_split(envp[i] + 5, ':');
 	if (!stc->path)
 		ft_error("", "Memory problems when splitting PATH", EXIT_FAILURE);
+	free(unset_path);
 }
 
 void	ft_parse_cmds(char **argv, t_pipex *stc)
@@ -96,23 +79,35 @@ void	ft_path(t_pipex *stc)
 	i = 0;
 	while (stc->path[i])
 	{
-		temp = ft_strjoin(stc->path[i], "/");
-		temp = ft_strjoin(temp, stc->parsed_cmd_one[0]);
+		temp = ft_strjoin(stc->path[i], "/"); // cambiar el join para que libere la primera str
+		temp = ft_strjoin_free(temp, stc->parsed_cmd_one[0]);
 		if (access(temp, X_OK) == 0)
-			stc->path_cmd_one = temp;
-		else
-			free(temp);
+			stc->path_cmd_one = ft_strdup(temp);
+		free(temp);
 		i++;
 	}
 	i = 0;
 	while (stc->path[i])
 	{
 		temp = ft_strjoin(stc->path[i], "/");
-		temp = ft_strjoin(temp, stc->parsed_cmd_two[0]);
+		temp = ft_strjoin_free(temp, stc->parsed_cmd_two[0]);
 		if (access(temp, X_OK) == 0)
-			stc->path_cmd_two = temp;
-		else
-			free(temp);
+			stc->path_cmd_two = ft_strdup(temp);
+		free(temp);
 		i++;
 	}
+}
+char	*ft_strjoin_free(char const *s1, char const *s2)
+{
+	char	*s3;
+	size_t	s3size;
+
+	s3size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	s3 = (char *)malloc(s3size);
+	if (s3 == NULL)
+		return (NULL);
+	ft_strlcpy(s3, s1, (ft_strlen(s1) + 1));
+	ft_strlcat(s3, s2, s3size);
+	free((void *)s1);
+	return (s3);
 }

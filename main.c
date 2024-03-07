@@ -6,25 +6,26 @@
 /*   By: cmunoz-g <cmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:08:03 by cmunoz-g          #+#    #+#             */
-/*   Updated: 2024/02/27 17:32:36 by cmunoz-g         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:39:04 by cmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-//PASAR LEAKS!
+//PASAR LEAKS a mas casos (awk incluido)!
+// revisar si meterle el ft_free en el ft_error
 // apreder AWK
 
-void	leaks()
-{
-	system("leaks pipex");
-}
+// void	leaks()
+// {
+// 	system("leaks pipex");
+// }
 
 int	main(int argc, char *argv[], char **envp)
 {
 	t_pipex	*stc;
 
-	atexit(leaks);
+	// atexit(leaks);
 	if (!envp)
 		ft_error("", "No environment variables", EXIT_FAILURE);
 	if (argc != 5)

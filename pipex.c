@@ -6,7 +6,7 @@
 /*   By: cmunoz-g <cmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:09:03 by cmunoz-g          #+#    #+#             */
-/*   Updated: 2024/02/21 11:10:37 by cmunoz-g         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:38:03 by cmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	child_two(t_pipex *stc, int *fd, char **envp, char **argv)
 		ft_error("", "Could not execute the second cmd", EXIT_FAILURE);
 }
 
-void	status(int status_one, int status_two)
+void	status(int status_one, int status_two, t_pipex *stc)
 {
 	int	exit_status;
 
@@ -50,9 +50,36 @@ void	status(int status_one, int status_two)
 	if (WIFEXITED(status_two) && WEXITSTATUS(status_two) != 0)
 		exit_status = WEXITSTATUS(status_two);
 	if (exit_status == 127 || exit_status == 2)
+	{
+		ft_free(stc);
 		exit(exit_status);
+	}
 	else
+	{
+		ft_free(stc);
 		exit(0);
+	}
+}
+
+void	ft_free(t_pipex *stc)
+{
+	size_t	i;
+
+	i = 0;
+	while(stc->path[i])
+		free(stc->path[i++]);
+	free(stc->path);
+	i = 0;
+	while (stc->parsed_cmd_one[i])
+		free(stc->parsed_cmd_one[i++]);
+	free(stc->parsed_cmd_one);
+	i = 0;
+	while (stc->parsed_cmd_two[i])
+		free(stc->parsed_cmd_two[i++]);
+	free(stc->parsed_cmd_two);
+	free(stc->path_cmd_one);
+	free(stc->path_cmd_two);
+	free(stc);
 }
 
 void	pipex(t_pipex *stc, char **envp, char**argv)
@@ -81,5 +108,5 @@ void	pipex(t_pipex *stc, char **envp, char**argv)
 		close(fd[0]);
 	waitpid(pid_one, &status_one, 0);
 	waitpid(pid_two, &status_two, 0);
-	status(status_one, status_two);
+	status(status_one, status_two, stc);
 }
