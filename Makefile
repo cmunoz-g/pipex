@@ -1,15 +1,18 @@
 NAME = pipex
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-INCLUDE = pipex.h
+INCLUDE = inc/
 OBJFOLDER = obj/
+FOLDER = srcs/
 SRCS = main.c pipex.c utils.c awk.c ft_error.c
 OBJS = $(SRCS:%.c=$(OBJFOLDER)%.o)
 LIBFT = libft
 
-$(OBJFOLDER)%.o: %.c 
-	@mkdir -p $(OBJFOLDER)
-	$(CC) $(CFLAGS) -I$(INCLUDE)  -c $< -o $@
+OBJS = $(SRCS:%.c=$(OBJFOLDER)%.o)
+
+$(OBJFOLDER)%.o: $(FOLDER)%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -I$(INCLUDE) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@make -C $(LIBFT)
